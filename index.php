@@ -42,21 +42,22 @@
        </div>     
        <div class="large-4 medium-4 columns">
       	 <div class="panel">
+         <form name="loginForm" method="post" action="login/validate.php">
             <div class="row">
                <div class="large-12 medium-12 columns">
 			      <label>User Name</label>
-			      <input type="text" placeholder="techie" />
+			      <input type="text" name="loguname" placeholder="techie" />
 		       </div>
             </div>
             <div class="row">
                <div class="large-12 medium-12 columns">
 			      <label>Password</label>
-			      <input type="password" placeholder="********" />
+			      <input type="password" name="logpass" placeholder="********" />
 		       </div>
             </div>
             <div class="row" align="right">
                <div class="large-12 medium-12 columns">
-                 <a href="#" class="small round button">Log On</a> 
+                 <a id="logbutton" class="small round button" onClick="buttonClicked('logbutton')">Log On</a> 
                </div>
             </div>
             <div class="row" align="left">
@@ -64,6 +65,7 @@
                    <label>Help Desk +0 000 000 0000</label>
                </div>
             </div>
+        </form>    
         </div>           
 	   </div>
     </div>

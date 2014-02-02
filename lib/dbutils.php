@@ -5,6 +5,11 @@ define ("DBNAME", "epmas");
 define ("APP_USER", "root");
 define ("APP_USER_PASS", "");
 define ("HOST", "localhost");
+define ("FULLPATH", "http://localhost/epmas");
+
+	function dummy(){
+		return "Hello, World!!";
+	}
 
 	function connectToDBServer(){
 		$link =mysql_connect(HOST,APP_USER,APP_USER_PASS) or die ("DB is not UP");
@@ -34,7 +39,7 @@ define ("HOST", "localhost");
 	}
 
 	function executeQuery($link, $query){
-		$resultset = mysql_query($command,$link);
+		$resultset = mysql_query($query,$link);
 		return $resultset;
 	}
 
@@ -96,18 +101,27 @@ define ("HOST", "localhost");
 
 	function addNewEmployee($link, $emp_fname, $emp_sname, $emp_designation, $emp_dob, 
 							$emp_phno, $emp_primary_skill, $emp_sec_skill, $emp_address){
-
-		$command="INSERT INTO EMPLOYEE (
+		$commanda="INSERT INTO EMPLOYEE (
 		emp_fname, emp_sname, emp_designation, emp_dob, emp_phno, emp_primary_skill, emp_sec_skill, emp_address
 		) VALUES ('$emp_fname', '$emp_sname', '$emp_designation', '$emp_dob','$emp_phno', '$emp_primary_skill',
 		'$emp_sec_skill', '$emp_address');";
 
-		$result=executeCommand($link,$command);
-		if($result==true) {
-			// insert a row in login table.
-			// return the emp-id
-			return true;
+		$resulta=executeCommand($link,$commanda);
+
+		if($resulta==true) {
+			$queryb="SELECT MAX(emp_id) FROM EMPLOYEE;";
+			$resultsetb=executeQuery($link,$queryb);
+			if($resultsetb==false) { 
+				// need to update the supervisor otherwise leave will not be given.
+			return 100; // '100-employee id not found.
+			}
+			$emp_id=retrieveElement($resultsetb,0,0);
+		    	// insert a row in login table.
+		    	$commandb="INSERT INTO LOGIN {
+		    	emp_id, password) VALUES ($emp_id, '12345678');";	
+		    	// return the emp-id
+		    	return $emp_id;
 		}
-		else return false;							
+		else return 300; // '300-employee insertion failed.							
 	}
 ?>

@@ -80,10 +80,6 @@
 	if(executeCommand($link, $command4)==true) echo "<BR>EMPLOYEE table Created!";
 	else echo "<BR>EMPLOYEE table Creation failed";
 
-	$command4a="ALTER TABLE EMPLOYEE AUTO_INCREMENT = 100000;";
-	if(executeCommand($link, $command4a)==true) echo "<BR>EMPLOYEE table autoincrement Changed!";
-	else echo "<BR>EMPLOYEE table autoincrement change failed";
-
 	$command5 = "CREATE TABLE LOGIN(
 	emp_id INT(6) references EMPLOYEE(emp_id), 
 	password CHAR(8) NOT NULL
