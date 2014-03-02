@@ -84,12 +84,47 @@
 	if(executeCommand($link, $command4a)==true) echo "<BR>EMPLOYEE table autoincrement Changed!";
 	else echo "<BR>EMPLOYEE table autoincrement change failed";
 
+        $command4b = "INSERT INTO EMPLOYEE(
+	emp_fname, 
+	emp_sname,  
+	emp_designation, 
+	emp_dob, 
+	emp_phno, 	
+	emp_primary_skill, 
+	emp_sec_skill, 
+	emp_address
+        ) VALUES
+        (
+        'ADMIN',
+        'EPMAS',
+        'M',
+        '01/01/0001',
+        0000000000,
+        'JV',
+        'TW',
+        'India'
+	)";
+	if(executeCommand($link, $command4b)==true) echo "<BR>Default Admin row Created!";
+	else echo "<BR>Default Admin row failed";
+
+
 	$command5 = "CREATE TABLE LOGIN(
 	emp_id INT(6) references EMPLOYEE(emp_id), 
 	password CHAR(8) NOT NULL
 	) ENGINE=INNODB;";
 	if(executeCommand($link, $command5)==true) echo "<BR>LOGIN table Created!";
 	else echo "<BR>LOGIN table Creation failed";
+
+        $command5a = "INSERT INTO LOGIN(
+	emp_id, 
+	password
+        ) VALUES 
+        (
+            100000,
+            '123'   
+        );";
+	if(executeCommand($link, $command5a)==true) echo "<BR> Default login row for Admin  Inserted!";
+	else echo "<BR>Default login row for admin failed";
 
 	$command6 = "CREATE TABLE JOB(
 	job_id INT(7) PRIMARY KEY auto_increment, 
@@ -105,6 +140,25 @@
 	if(executeCommand($link, $command6)==true) echo "<BR>JOB table Created!";
 	else echo "<BR>JOB table Creation failed";
 
+	$command6a="ALTER TABLE JOB AUTO_INCREMENT = 1000;";
+	if(executeCommand($link, $command6a)==true) echo "<BR>JOB table autoincrement Changed!";
+	else echo "<BR>JOB table autoincrement change failed";
+
+
+	$command6b="INSERT INTO job (
+	job_desc,status,updates,assign_to,created_by,created_on,last_changed) VALUES
+        ('dummy description', 
+         'W',
+         'some updates should go here', 
+	 100000, 
+	 100000, 
+	 CURRENT_TIMESTAMP, 
+	 CURRENT_TIMESTAMP);";
+
+	if(executeCommand($link, $command6b)==true) echo "<BR>Dummy JOB insertion succeeded!";
+	else echo "<BR>Dummy JOB insertion failed";
+
+
 	$command7 = "CREATE TABLE JOB_H(
 	job_id INT(7) references JOB(job_id),
 	status CHAR(1) NOT NULL,
@@ -117,15 +171,21 @@
 
 	$command8 = "CREATE TABLE LEAVE_REQ(
 	req_cd INT(7) PRIMARY KEY auto_increment,
-	emp_id INT(6) references EMPLOYEE(emp_id), 
-	applied_on DATETIME NOT NULL,
+    emp_id INT(6) references EMPLOYEE(emp_id),
+    leave_type CHAR(1), 
+    lfrom CHAR(10) NOT NULL,
+    lto CHAR(10) NOT NULL,
 	status CHAR(1),
 	reason VARCHAR(200) NOT NULL,
 	pending_with INT(6) references EMPLOYEE(emp_id),
 	validity CHAR(1) DEFAULT 'Y'
 	) ENGINE=INNODB;";
 	if(executeCommand($link, $command8)==true) echo "<BR>LEAVE_REQ table Created!";
-	else echo "<BR>LEAVE_REQ table Creation failed";
+    else echo "<BR>LEAVE_REQ table Creation failed";
+
+    $command8a="ALTER TABLE LEAVE_REQ AUTO_INCREMENT = 1000;";
+	if(executeCommand($link, $command8a)==true) echo "<BR>LEAVE REQUEST table autoincrement Changed!";
+	else echo "<BR>LEAVE REQUEST table autoincrement change failed";
 ?>
 
 

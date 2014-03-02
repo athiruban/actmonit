@@ -7,7 +7,7 @@
 
 function buttonClicked(target)
 {
-    if(target == 'logbutton') {
+    if(target=='logbutton'){
     //check input boxes
         username=document.forms["loginForm"].elements['loguname'].value;
 	password=document.forms["loginForm"].elements['logpass'].value;
@@ -24,48 +24,16 @@ function buttonClicked(target)
 	    document.forms["loginForm"].submit();
 	}
     }
-    else if(target == 'regsavebutton'){
-        fname   = document.forms["registerForm"].elements['fname'].value;
-    	lname   = document.forms["registerForm"].elements['lname'].value;
-        design  = document.forms["registerForm"].elements['design'].value; //'M','P' or 'L'
-        dob     = document.forms["registerForm"].elements['dob'].value;
-        pno     = document.forms["registerForm"].elements['pno'].value;
-        pskill  = document.forms["registerForm"].elements['pskill'].value; //'JV', 'MF', 'DN' or 'PH'
-        sskill  = document.forms["registerForm"].elements['sskill'].value; //'TW', 'BL', 'GD' or 'AC'
-        resaddr = document.forms["registerForm"].elements['resaddr'].value;
-
-	if(isEmpty(fname)==true){
-	    alert("Please enter First Name"); 
-	}
-	else if(isEmpty(lname)==true){
-	    alert("Please enter Last Name");
-	}
-	else if(isEmpty(design)==true){
-	    alert("Please enter Designation");
-	}
-	else if(isEmpty(dob)==true){
-	    alert("Please enter Date of Birth");
-	}
-	else if(isEmpty(pno)==true){
-	    alert("Please enter Phone Number");
-	}
-	else if(isEmpty(pskill)==true){
-	    alert("Please select Primary Skill");
-	}
-	else if(isEmpty(sskill)==true){
-	    alert("Please select Secondary Skill");
-	}
-	else if(isEmpty(resaddr)==true){
-	    alert("Please enter Residential Address");
-	}
-	else if(isTenDigitNumeric(pno)==false){
-            alert("Phone number should be a 10 digit number");
-	}
-	else{
-	    //Perfect
-	    //Use Ajax to send registration values to DB
-	    alert('Perfect');
-	}
+    else if(target=='regcanbutton'){
+	alert('This is not supported as of now');
+    }
+    else if(target=='searchButton'){
+	ticketno=prompt('Enter job number ','');
+	window.location = 'http://localhost/epmas/jobs/search/index.php?job_id='+ticketno+'';
+    }
+    else if(target=='editButton'){
+	ticketno=prompt('Enter job number ','');
+	window.location = 'http://localhost/epmas/jobs/edit/index.php?job_id='+ticketno+'';
     }
 }
 
@@ -75,14 +43,15 @@ function isEmpty(value){
 }	
 
 function isSixDigitNumeric(userid){
-	var regex = /^[1-9]{6}$/g;
-	var found = regex.test(userid);
-	return found;
+    var regex = /^[0-9]{6}$/g;
+    var found = regex.test(userid);
+    return found;
 }
 
 function isTenDigitNumeric(userid){
-	var regex = /^[1-9]{10}$/g;
-	var found = regex.test(userid);
-	return found;
+    var regex = /^[0-9]{10}$/g;
+    var found = regex.test(userid);
+    return found;
 }
+
 

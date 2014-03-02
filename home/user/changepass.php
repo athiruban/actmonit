@@ -7,10 +7,6 @@ if(!isset($_SESSION['emp_design'])){
     sleep(3);
     header("Location: ".FULLPATH.""); 
 }
-if($_SESSION['emp_design']!='M'){
-    echo 'Invalid Call. You dont have access to create new job.';
-    header("Location: ".FULLPATH."/home");
-}
 $USER_TYPE =$_SESSION['emp_design'];
 $USER_ID   =$_SESSION['emp_id'];
 $USER_PASS =$_SESSION['emp_password'];
@@ -20,7 +16,7 @@ $USER_PASS =$_SESSION['emp_password'];
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EPM and AS - Create New Job Landing page</title>
+        <title>EPM and AS - User home page</title>
         <link rel="stylesheet" href="../../css/foundation.css" />
         <link rel="stylesheet" type="text/css" href="../../css/tcal.css" />
         <script src="../../js/tcal.js"></script>
@@ -41,25 +37,25 @@ $USER_PASS =$_SESSION['emp_password'];
         require(FULLPATH.'/menu-bar.php?emp_design='.$USER_TYPE);
         ?>
             <div class="large-9 medium-9 columns">
-                <form name="newJobForm" method="post">
-                    <div class="callout panel">
-                        <h6> <left> Open New Job </left> </h6>
+                <div class="callout panel">
+                    <form name="changePassForm">
+                        <p> <h6> <left> Change Password </left> </h6> </p>
                         <div class="row">
                             <div class="large-6 columns">
-                                <label>Status:</label>
+                                <label>Old Password</label>
                                 <div class="row">
                                     <div class="large-6 columns">
-                                        <input type="text" name="jobStatus" size="20" value="Open" readonly>
+                                        <input name="oldpass" type="password" placeholder="*****" value="" />						
                                     </div>
                                     <div class="large-6 columns">
                                     </div>
                                 </div> 
                             </div>
                             <div class="large-6 columns">
-                                <label>Assigned To:</label>
+                                <label>New Password</label>
                                 <div class="row">
                                     <div class="large-6 columns">
-                                        <input type="text" name="assignTo" size="20" value="">  
+                                        <input name="newpass" type="password" placeholder="*****" value="" />  
                                     </div>
                                     <div class="large-6 columns">
                                     </div>	
@@ -67,41 +63,29 @@ $USER_PASS =$_SESSION['emp_password'];
                             </div>
                         </div>
                         <div class="row">
-                            <div class="large-12 columns">
-                                <label>Description:</label> 
-                                <input type="text" name="jobDesc" size="40" value="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label>More Details:</label> 
-                                <textarea name="jobUpdates"></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="large-3 medium-3 columns">
-                                <a id="newjobSave" class="small radius button" style="color:White">Save</a>
+                                <a id="changePass" class="small radius button" style="color:White">Change</a>
                             </div>
                             <div class="large-3 medium-3 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked('newJobCancel')">Cancel</a>
+                                <a class="small radius button" style="color:White" onClick="buttonClicked('cancelChangePass')">Cancel</a>
                             </div>
                             <div class="large-6 medium-6 columns"> </div>
                         </div>
-                    </div> <!-- End of Panel -->
-                </form>
+                    </form>
+                </div>      
             </div>     
         </div> <!--End of row -->
         <div class="row">
             <div class="large-12 medium-12 columns">
-                <center> <span style="font-size:9px">&copy; Copyrights 2014. Some rights reserved.</span></center>
+                <center> 
+                    <span style="font-size:9px">&copy; Copyrights 2014. Some rights reserved.</span>
+                </center>
             </div>
         </div>
         <script src="../../js/jquery.js"></script>
         <script src="../../js/foundation.min.js"></script>
-        <script src="../../js/athi.js"> </script>
         <script>
             $(document).foundation();
         </script>
     </body>
 </html>
-

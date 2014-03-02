@@ -1,48 +1,27 @@
 <?php
+    require('../lib/dbutils.php');
 
-require('../lib/dbutils.php');
+    $token = connectToDBServer();
+    $result = connectToDB($token);
+	
+    if($result==false) {
+	echo "Database is currently down";
+        exit(0); 
+    }
+    $username=$_POST['loguname'];
+    $password=$_POST['logpass'];
+    $res = isValidUser($token,$username,$password);
 
-	$token = connectToDBServer();
-	$result = connectToDB($token);
-	
-	if($result==true) {
-	}
-	else {
-		//display error form 
-		echo "Database is currently down";
-	}
-	
-	$username=$_POST['loguname'];
-	$password=$_POST['logpass'];
-	
-	echo $username;
-	echo $password;
-
-	$res = isValidUser($token,$username,$password);
-	
-	if($res==true){
-		echo "Valid User";
-	}
-	else {
-		echo "Not a valid user";
-	}
-	
-/*
-	$query = "select * from $table_name where username = '$username' and password = '$password'";
-	
-	$count = mysql_num_rows(mysql_query($query));	
-
-	if($count == 1 )
-	{
-		session_start(); 
-		$_SESSION['user'] = $username;
-		// redirect to wall.............
-		header("Location: http://localhost/amass/wall");		
-	}
-	else
-	{
-		echo "Login Failure";
-		echo "\n\nTry Again";
-	}
-*/	
+    if($res==true){
+	$emp_design = getEmpDesignation($token,$username);
+	session_start();
+	$_SESSION['emp_id']=$username;
+	$_SESSION['emp_design']=$emp_design;
+	$_SESSION['emp_password']=$password;
+	header("Location: ".FULLPATH."/home");
+    }
+    else {
+        echo "Not a valid user";
+	echo "<a href=".FULLPATH."> Go Back </a>";
+    }	
 ?>
