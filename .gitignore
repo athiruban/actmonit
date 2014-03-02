@@ -1,0 +1,12 @@
+css/*.*
+*.php~
+*.js~
+test
+requirements/*.*
+img
+js
+!js/athi.js
+!js/modernizr.js
+configure/*.php~
+sql/*.*
+
