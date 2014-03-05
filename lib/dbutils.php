@@ -139,22 +139,22 @@ function populateLeave($link, $emp_id){
         echo '
         <div class="row">
             <div class="large-2 columns">
-                <input type="text" value="NA" />
+                <input type="text" value="NA" readonly />
             </div>
             <div class="large-2 columns">
-                <input type="text" value="NA" />
+                <input type="text" value="NA" readonly />
             </div>
             <div class="large-2 columns">
-                <input type="text" value="NA" />
+                <input type="text" value="NA" readonly />
             </div>
             <div class="large-2 columns">
-                <input type="text" value="NA" />
+                <input type="text" value="NA" readonly />
             </div>
             <div class="large-2 columns">
-                <input type="text" value="NA" />
+                <input type="text" value="NA" readonly />
             </div>    
             <div class="large-2 columns">
-                <textarea rows="5"> NA </textarea>
+                <textarea rows="5" readonly> NA </textarea>
             </div>
         </div>
         ';
@@ -209,22 +209,161 @@ function populateLeave($link, $emp_id){
     }
 }
 
+function populatemyrequest($link, $emp_id){ 
+    $query="SELECT emp_id, leave_type, lfrom, lto, status, reason, req_cd FROM leave_req WHERE emp_id = $emp_id;";
+    $resultset=executeQuery($link,$query);
+    if($resultset==false||countRows($resultset)==0){
+        echo '
+        <div class="row">
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>    
+            <div class="large-2 columns">
+                <textarea rows="5"> NA </textarea>
+            </div>
+        </div>
+        ';
+        return;
+    }
+    $nRows=countRows($resultset);
+    if($nRows>=1){
+        for($index=0; $index<$nRows; $index++){
+            $who        = retrieveElement($resultset,$index,0);
+            $leavetype  = retrieveElement($resultset,$index,1);
+            $from       = retrieveElement($resultset,$index,2);
+            $to         = retrieveElement($resultset,$index,3);
+            $status     = retrieveElement($resultset,$index,4);
+            $reason     = retrieveElement($resultset,$index,5);
+            $leaveid    = retrieveElement($resultset,$index,6);
+            echo '
+                <div class="row">
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$who.' - '.getEmpName($link, $who).'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.convertLeaveType($leavetype).'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$from.'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$to.'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.convertLeaveStatus($status).'" />
+                    </div>    
+                    <div class="large-2 medium-2 columns">
+                        <textarea rows="5" readonly> "'.$reason.'" </textarea>
+                    </div>
+                </div>        
+            ';
+        }
+    }
+}
+
+function populateallrequest($link, $emp_id){ 
+    $query="SELECT emp_id, leave_type, lfrom, lto, status, reason, req_cd FROM leave_req ORDER BY req_cd DESC;";
+    $resultset=executeQuery($link,$query);
+    if($resultset==false||countRows($resultset)==0){
+        echo '
+        <div class="row">
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>
+            <div class="large-2 columns">
+                <input type="text" value="NA" />
+            </div>    
+            <div class="large-2 columns">
+                <textarea rows="5"> NA </textarea>
+            </div>
+        </div>
+        ';
+        return;
+    }
+    $nRows=countRows($resultset);
+    if($nRows>=1){
+        for($index=0; $index<$nRows; $index++){
+            $who        = retrieveElement($resultset,$index,0);
+            $leavetype  = retrieveElement($resultset,$index,1);
+            $from       = retrieveElement($resultset,$index,2);
+            $to         = retrieveElement($resultset,$index,3);
+            $status     = retrieveElement($resultset,$index,4);
+            $reason     = retrieveElement($resultset,$index,5);
+            $leaveid    = retrieveElement($resultset,$index,6);
+            echo '
+                <div class="row">
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$who.' - '.getEmpName($link, $who).'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.convertLeaveType($leavetype).'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$from.'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.$to.'" />
+                    </div>
+                    <div class="large-2 medium-2 columns">
+                        <input type="text" readonly value="'.convertLeaveStatus($status).'" />
+                    </div>    
+                    <div class="large-2 medium-2 columns">
+                        <textarea rows="5" readonly> "'.$reason.'" </textarea>
+                    </div>
+                </div>        
+            ';
+        }
+    }
+}
+
+
 function cancelLeave($link, $leave_req_cd){
     $command="UPDATE LEAVE_REQ SET status ='C' WHERE req_cd=$leave_req_cd";
     $result=executeCommand($link,$command);
-    return $result;	
+    if($result==true) return 0;
+    else return 100;	
 }
 
 function approveLeave($link, $leave_req_cd){
     $command="UPDATE LEAVE_REQ SET status ='A' WHERE req_cd=$leave_req_cd";
     $result=executeCommand($link,$command);
-    return $result;	
+    if($result==true) return 0;
+    else return 100;	
 }
 
 function rejectLeave($link, $leave_req_cd){
     $command="UPDATE LEAVE_REQ SET status ='R' WHERE req_cd=$leave_req_cd";
     $result=executeCommand($link,$command);
-    return $result;	
+    if($result==true) return 0;
+    else return 100;	
+}
+
+function changePassword($link, $emp_id, $newpass){
+    $command="UPDATE LOGIN SET password = '$newpass' WHERE emp_id=$emp_id";
+    $result=executeCommand($link,$command);
+    if($result==true) return 0;
+    else return 100;	
 }
 
 function addNewJob($link,$assignto, $jobdesc, $jobupdates, $created_by){

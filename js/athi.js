@@ -86,7 +86,10 @@ $("#editjobSave").click(function(){
     assignto      = document.forms["editJobForm"].elements['assignTo'].value;
     jobupdates    = document.forms["editJobForm"].elements['jobUpdates'].value;
 
-if(isEmpty(assignto)==true){
+if(isEmpty(jobid)==true||jobid==null){
+    alert("Please enter Job Id"); 
+}
+else if(isEmpty(assignto)==true){
     alert("Please enter Assign To"); 
 }
 else if(isEmpty(jobupdates)==true){
@@ -130,6 +133,7 @@ else{
 }
 });
 
+
 $("#applyLeave").click(function(){
     lfrom   = document.forms["leaveApplyForm"].elements['from'].value;
     lto     = document.forms["leaveApplyForm"].elements['to'].value;
@@ -159,6 +163,37 @@ else{
     function(data,status){
         alert(data);
         document.forms["leaveApplyForm"].reset();
+    });		    
+}
+});
+
+$("#changePass").click(function(){
+oldpass     = document.forms["changePassForm"].elements['oldpass'].value;
+newpass     = document.forms["changePassForm"].elements['newpass'].value;
+newpassr    = document.forms["changePassForm"].elements['newpassr'].value;
+
+if(isEmpty(oldpass)==true){
+    alert("Please enter Old Password"); 
+}
+else if(isEmpty(newpass)==true){
+    alert("Please enter New Password"); 
+}
+else if(isEmpty(newpassr)==true){
+    alert("Please enter Re-enter New Password"); 
+}
+else if(newpass!=newpassr){
+    alert("New Password and Re-enter New password not matching"); 
+}
+else{
+    $.post("http://localhost/epmas/home/user/cpass.php",
+    {
+        oldpass:oldpass,
+        newpass:newpass,
+        newpassr:newpassr
+    },
+    function(data,status){
+        alert(data);
+        document.forms["changePassForm"].reset();
     });		    
 }
 });

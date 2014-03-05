@@ -13,6 +13,10 @@ $return=connectToDB($token);
 // Get current values of the job from db
 // compare against the passed values
 
+$temp=getJobDesc($token,$jobid);
+if($temp=='NA') {echo 'Not a valid Job'; exit(0); }
+
+
 $ojobstatus = getJobStatus($token, $jobid);
 $oassignto  = getJobAssignTo($token, $jobid);
 $ojobupdates= getJobUpdates($token, $jobid);

@@ -28,7 +28,9 @@ else{
                     <p><br>
                	     <a onClick="buttonClicked('searchButton')" style="width:100%" class="small radius button">Search Job</a><br/>
                      <a onClick="buttonClicked('editButton')"   style="width:100%" class="small radius button">Edit Job</a><br/>
+                     <a href="/epmas/leave/view" style="width:100%" class="small radius button">My Requests</a><br/>
                      <a href="/epmas/leave/apply" style="width:100%" class="small radius button">Apply Leave Request</a><br/>
+
                   </p>
 			   </div>
           </div>
@@ -45,7 +47,7 @@ else{
                     <p><br>
                	     <a onClick="buttonClicked('searchButton')" style="width:100%" class="small radius button">Search Job</a><br/>
                      <a onClick="buttonClicked('editButton')"   style="width:100%" class="small radius button">Edit Job</a><br/>
-                     <a href="/epmas/leave/open" style="width:100%" class="small radius button">Post Leave Request</a><br/>
+                     <a href="/epmas/leave/view" style="width:100%" class="small radius button">My Requests</a><br/>
                      <a href="/epmas/leave/apply" style="width:100%" class="small radius button">Apply Leave Request</a><br/>
                   </p>
 			   </div>

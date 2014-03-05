@@ -39,7 +39,16 @@ $USER_PASS =$_SESSION['emp_password'];
             <div class="large-9 medium-9 columns">
                 <form name="leaveApplyForm" method="post">
                     <div class="callout panel">
-                        <h6> <left> Apply Leave </left> </h6>
+                        <p> 
+                            <h6> 
+                                <left> 
+                                    <b> 
+                                        <span style="color:#0079A1"> Leave application form 
+                                        </span> 
+                                    </b> 
+                                </left> 
+                            </h6> 
+                        </p>
                         <div class="row">
                             <div class="large-6 columns">
                                 <label>From:</label>
@@ -85,7 +94,7 @@ $USER_PASS =$_SESSION['emp_password'];
                                 <a id="applyLeave" class="small radius button" style="color:White">Save</a>
                             </div>
                             <div class="large-3 medium-3 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked('cancelApply')">Cancel</a>
+                                <a class="small radius button" style="color:White" href="../../home/">Cancel</a>
                             </div>
                             <div class="large-6 medium-6 columns"> </div>
                         </div>

@@ -39,10 +39,19 @@ $USER_PASS =$_SESSION['emp_password'];
             <div class="large-9 medium-9 columns">
                 <div class="callout panel">
                     <form name="changePassForm">
-                        <p> <h6> <left> Change Password </left> </h6> </p>
+                        <p> 
+                            <h6> 
+                                <left> 
+                                    <b> 
+                                        <span style="color:#0079A1"> Please make your password more difficult to guess for better security! 
+                                        </span> 
+                                    </b> 
+                                </left> 
+                            </h6> 
+                        </p>
                         <div class="row">
                             <div class="large-6 columns">
-                                <label>Old Password</label>
+                                <label>Current Password</label>
                                 <div class="row">
                                     <div class="large-6 columns">
                                         <input name="oldpass" type="password" placeholder="*****" value="" />						
@@ -63,11 +72,23 @@ $USER_PASS =$_SESSION['emp_password'];
                             </div>
                         </div>
                         <div class="row">
+                            <div class="large-6 columns">
+                                <label>Re-enter New Password</label>
+                                <div class="row">
+                                    <div class="large-6 columns">
+                                        <input name="newpassr" type="password" placeholder="*****" value="" />						
+                                    </div>
+                                    <div class="large-6 columns">
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="large-3 medium-3 columns">
                                 <a id="changePass" class="small radius button" style="color:White">Change</a>
                             </div>
                             <div class="large-3 medium-3 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked('cancelChangePass')">Cancel</a>
+                                <a class="small radius button" style="color:White" href="../">Cancel</a>
                             </div>
                             <div class="large-6 medium-6 columns"> </div>
                         </div>
@@ -83,6 +104,7 @@ $USER_PASS =$_SESSION['emp_password'];
             </div>
         </div>
         <script src="../../js/jquery.js"></script>
+        <script src="../../js/athi.js"></script>
         <script src="../../js/foundation.min.js"></script>
         <script>
             $(document).foundation();

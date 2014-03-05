@@ -82,11 +82,10 @@ $USER_PASS =$_SESSION['emp_password'];
                         </ul>
                         <img src="../img/link.png" alt="Important Links" width="40px" height="40px" />
                         <ul>
-                            <li> <a> Complete List of Leave applications. (WIP)                      </a>   </li>
-                            <li> <a> Complete List of Employees. (WIP)                               </a>   </li>
-                            <li> <a href="<?php echo FULLPATH.'/register'; ?>">Register New Employee.</a>   </li>
-                            <li> <a href="<?php echo FULLPATH.'/jobs/list'; ?>">Jobs assigned to you.</a>   </li>
-                            <li> <a href="<?php echo FULLPATH.'/supervisor'; ?>">Supervisor Update.</a>     </li>
+                            <li> <a href="<?php echo FULLPATH.'/leave/view/all.php'; ?>"> Complete List of Leave applications.</a></li>
+                            <li> <a href="<?php echo FULLPATH.'/register'; ?>">Register New Employee.</a>               </li>
+                            <li> <a href="<?php echo FULLPATH.'/jobs/list'; ?>">Jobs assigned to you.</a>               </li>
+                            <li> <a href="<?php echo FULLPATH.'/supervisor'; ?>">Supervisor Update.</a>                 </li>
                         </ul>
                     </div>
                 <?php 	

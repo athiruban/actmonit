@@ -41,6 +41,16 @@
 	    require(FULLPATH.'/menu-bar.php?emp_design='.$USER_TYPE);
         ?>
             <div class="large-9 medium-9 columns">
+                <p> 
+                    <h6> 
+                        <left> 
+                            <b> 
+                                <span style="color:#0079A1"> Jobs Search Result Page 
+                                </span> 
+                            </b> 
+                        </left> 
+                    </h6> 
+                </p>
             <?php
                  populateJob($token,$_GET['job_id']);
             ?>

@@ -5,6 +5,7 @@
 
 /* My JS Code */
 
+
 function buttonClicked(target)
 {
     if(target=='logbutton'){
@@ -29,11 +30,13 @@ function buttonClicked(target)
     }
     else if(target=='searchButton'){
 	ticketno=prompt('Enter job number ','');
-	window.location = 'http://localhost/epmas/jobs/search/index.php?job_id='+ticketno+'';
+    if(ticketno=='') alert('Enter valid Job ID');
+    else window.location = 'http://localhost/epmas/jobs/search/index.php?job_id='+ticketno+'';
     }
     else if(target=='editButton'){
 	ticketno=prompt('Enter job number ','');
-	window.location = 'http://localhost/epmas/jobs/edit/index.php?job_id='+ticketno+'';
+    if(ticketno=='') alert('Enter valid Job ID');
+    else window.location = 'http://localhost/epmas/jobs/edit/index.php?job_id='+ticketno+'';
     }
 }
 
@@ -54,4 +57,25 @@ function isTenDigitNumeric(userid){
     return found;
 }
 
+function approveLeaveClick(leavecd){
+    $.post("http://localhost/epmas/leave/approve/approve.php",
+    {
+        leavecd:leavecd
+    },
+    function(data,status){
+        alert(data);
+        window.location = 'http://localhost/epmas/leave/approve/'; 
+    });
+} 
+
+function rejectLeaveClick(leavecd){
+    $.post("http://localhost/epmas/leave/approve/reject.php",
+    {
+        leavecd:leavecd
+    },
+    function(data,status){
+        alert(data);
+        window.location = 'http://localhost/epmas/leave/approve/'; 
+    });
+} 
 

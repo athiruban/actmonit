@@ -41,105 +41,116 @@ $USER_PASS =$_SESSION['emp_password'];
         require(FULLPATH.'/menu-bar.php?emp_design='.$USER_TYPE);
         ?>
             <div class="large-9 medium-9 columns">
-            <?php
-            $job_id=$_GET['job_id'];
-            $job_status=getJobStatus($token, $job_id); 	
+                <p> 
+                    <h6> 
+                        <left> 
+                            <b> 
+                                <span style="color:#0079A1"> Job Edit Page 
+                                </span> 
+                            </b> 
+                        </left> 
+                    </h6> 
+                </p>
 
-            if($job_status=="O"){
-                $job_status_txt='<option value="O" selected="selected">Open</option>
-                                 <option value="P">Pending</option>
-                                 <option value="W">Work In-progress</option>
-                                 <option value="R">Resolved</option>
-                                 <option value="C">Closed</option>';
-            }
-            else if($job_status=="P"){
-                $job_status_txt='<option value="O">Open</option>
-                                 <option value="P" selected="selected">Pending</option>
-                                 <option value="W">Work In-progress</option>
-                                 <option value="R">Resolved</option>
-                                 <option value="C">Closed</option>';
-            }
-            else if($job_status=="W"){
-                $job_status_txt='<option value="O">Open</option>
-                                 <option value="P">Pending</option>
-                                 <option value="W" selected="selected">Work In-progress</option>
-                                 <option value="R">Resolved</option>
-                                 <option value="C">Closed</option>';
-            }
-            else if($job_status=="R"){
-                $job_status_txt='<option value="O">Open</option>
-                                 <option value="P">Pending</option>
-                                 <option value="W">Work In-progress</option>
-                                 <option value="R" selected="selected">Resolved</option>
-                                 <option value="C">Closed</option>';
-            }
-            else if($job_status=="C"){
-                $job_status_txt='<option value="O">Open</option>
-                                 <option value="P">Pending</option>
-                                 <option value="W">Work In-progress</option>
-                                 <option value="R">Resolved</option>
-                                 <option value="C" selected="selected">Closed</option>';
-            }
-            else{
-                $job_status_txt='<option value="NA">Not Available</option>';
-            }
+                <?php
+                $job_id=$_GET['job_id'];
+                $job_status=getJobStatus($token, $job_id); 	
 
-            echo '
-                <div class="callout panel">
-                    <form name="editJobForm" method="post">
-                        <div class="row">
-                            <div class="large-4 columns">
-                                <label>Job ID:</label>
-                                <div class="row">
-                                    <div class="large-6 columns">
-                                        <input type="text" name="jobId" size="7" value="'.$job_id.'" readonly>
-                                    </div>
-                                    <div class="large-6 columns">
-                                    </div>
-                                </div>    
+                if($job_status=="O"){
+                    $job_status_txt='<option value="O" selected="selected">Open</option>
+                                     <option value="P">Pending</option>
+                                     <option value="W">Work In-progress</option>
+                                     <option value="R">Resolved</option>
+                                     <option value="C">Closed</option>';
+                }
+                else if($job_status=="P"){
+                    $job_status_txt='<option value="O">Open</option>
+                                     <option value="P" selected="selected">Pending</option>
+                                     <option value="W">Work In-progress</option>
+                                     <option value="R">Resolved</option>
+                                     <option value="C">Closed</option>';
+                }
+                else if($job_status=="W"){
+                    $job_status_txt='<option value="O">Open</option>
+                                     <option value="P">Pending</option>
+                                     <option value="W" selected="selected">Work In-progress</option>
+                                     <option value="R">Resolved</option>
+                                     <option value="C">Closed</option>';
+                }
+                else if($job_status=="R"){
+                    $job_status_txt='<option value="O">Open</option>
+                                     <option value="P">Pending</option>
+                                     <option value="W">Work In-progress</option>
+                                     <option value="R" selected="selected">Resolved</option>
+                                     <option value="C">Closed</option>';
+                }
+                else if($job_status=="C"){
+                    $job_status_txt='<option value="O">Open</option>
+                                     <option value="P">Pending</option>
+                                     <option value="W">Work In-progress</option>
+                                     <option value="R">Resolved</option>
+                                     <option value="C" selected="selected">Closed</option>';
+                }
+                else{
+                    $job_status_txt='<option value="NA">Not Available</option>';
+                }
+
+                echo '
+                    <div class="callout panel">
+                        <form name="editJobForm" method="post">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <label>Job ID:</label>
+                                    <div class="row">
+                                        <div class="large-6 columns">
+                                            <input type="text" name="jobId" size="7" value="'.$job_id.'" readonly>
+                                        </div>
+                                        <div class="large-6 columns">
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="large-4 columns">
+                                    <label>Status:</label>
+                                    <div class="row">
+                                        <div class="large-10 columns">
+                                            <select name="jobStatus">
+                                            '.$job_status_txt.'
+                                            </select>  
+                                        </div>
+                                        <div class="large-2 columns">
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="large-4 columns">
+                                    <label>Assigned To:</label>
+                                    <input type="text" name="assignTo" size="20" value="'.getJobAssignTo($token,$job_id).'">  
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Description:</label> 
+                                    <textarea name="jobDesc" readonly>'.getJobDesc($token,$job_id).'</textarea>
+                                </div>
                             </div>
-                            <div class="large-4 columns">
-                                <label>Status:</label>
-                                <div class="row">
-                                    <div class="large-10 columns">
-                                        <select name="jobStatus">
-                                        '.$job_status_txt.'
-                                        </select>  
-                                    </div>
-                                    <div class="large-2 columns">
-                                    </div>
-                                </div> 
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Updates:</label> 
+                                    <textarea name="jobUpdates">'.getJobUpdates($token,$job_id).'</textarea>
+                                </div>
                             </div>
-                            <div class="large-4 columns">
-                                <label>Assigned To:</label>
-                                <input type="text" name="assignTo" size="20" value="'.getJobAssignTo($token,$job_id).'">  
+                            <div class="row">
+                                <div class="large-3 medium-3 columns">
+                                    <a id="editjobSave" class="small radius button" style="color:White">Save</a>
+                                </div>
+                                <div class="large-3 medium-3 columns">
+                                    <a class="small radius button" style="color:White" href="../../home/">Cancel</a>
+                                </div>
+                                <div class="large-6 medium-6 columns"> </div>
                             </div>
-                        </div> 
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label>Description:</label> 
-                                <textarea name="jobDesc" readonly>'.getJobDesc($token,$job_id).'</textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label>Updates:</label> 
-                                <textarea name="jobUpdates">'.getJobUpdates($token,$job_id).'</textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-3 medium-3 columns">
-                                <a id="editjobSave" class="small radius button" style="color:White">Save</a>
-                            </div>
-                            <div class="large-3 medium-3 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked(\'editJobCancel\')">Cancel</a>
-                            </div>
-                            <div class="large-6 medium-6 columns"> </div>
-                        </div>
-                    </form>  
-                </div> <!-- End of Callout panel -->
-            ';
-            ?>
+                        </form>  
+                    </div> <!-- End of Callout panel -->
+                ';
+                ?>
         </div>     
         </div> <!--End of row -->
         <div class="row">

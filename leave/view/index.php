@@ -16,7 +16,7 @@ $USER_PASS =$_SESSION['emp_password'];
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EPM and AS - Approve Leave Landing Page</title>
+        <title>EPM and AS - My Leave Requests</title>
         <link rel="stylesheet" href="../../css/foundation.css" />
         <link rel="stylesheet" type="text/css" href="../../css/tcal.css" />
         <script src="../../js/tcal.js"></script>
@@ -44,12 +44,13 @@ $USER_PASS =$_SESSION['emp_password'];
                             <h6> 
                                 <left> 
                                     <b> 
-                                        <span style="color:#0079A1"> Leave Adjudication  
+                                        <span style="color:#0079A1"> List of your requests so far 
                                         </span> 
                                     </b> 
                                 </left> 
                             </h6> 
                         </p>
+
                         <div class="row">
                             <div class="large-2 columns">Employee ID</div>
                             <div class="large-2 columns">Leave Type</div>
@@ -60,7 +61,7 @@ $USER_PASS =$_SESSION['emp_password'];
                         </div>
 
                         <?php
-                            populateLeave($token, $USER_ID);
+                            populatemyrequest($token, $USER_ID);
                         ?>
 
                     </div> <!-- End of Panel -->

@@ -83,7 +83,7 @@ $USER_PASS =$_SESSION['emp_password'];
                                 <a id="newjobSave" class="small radius button" style="color:White">Save</a>
                             </div>
                             <div class="large-3 medium-3 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked('newJobCancel')">Cancel</a>
+                                <a class="small radius button" style="color:White" href="../../home/">Cancel</a>
                             </div>
                             <div class="large-6 medium-6 columns"> </div>
                         </div>
