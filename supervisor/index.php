@@ -56,7 +56,7 @@
                                 <a id="sprSave" class="small radius button" style="color:White">Save</a>
                             </div>
                             <div class="large-6 medium-6 columns">
-                                <a class="small radius button" style="color:White" onClick="buttonClicked('sprcanbutton')">Cancel</a>
+                                <a class="small radius button" style="color:White" href="../home/">Cancel</a>
                             </div>
                         </div>
                     </div>   
