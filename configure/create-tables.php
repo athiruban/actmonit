@@ -74,7 +74,8 @@
 	emp_phno CHAR(10), 	
 	emp_primary_skill CHAR(5) references SKILLS(skill_cd), 
 	emp_sec_skill CHAR(5) references SKILLS(skill_cd), 
-	emp_address VARCHAR(70) NOT NULL, 
+    emp_address VARCHAR(70) NOT NULL,
+    emp_photo VARCHAR(50), 
 	validity CHAR(1) DEFAULT 'Y'
 	) ENGINE=INNODB;";
 	if(executeCommand($link, $command4)==true) echo "<BR>EMPLOYEE table Created!";
