@@ -54,9 +54,32 @@ function isValidUser($link, $emp_id, $password){
     $query="SELECT * FROM LOGIN WHERE emp_id=$emp_id AND password='$password'";
     $result=executeQuery($link,$query);
     $nrows=countRows($result);
-
     if($nrows==1) return true;
     else return false;	
+}
+
+function isPhotoNmVal($link, $name, $emp_id){
+    $query="SELECT * FROM EMPLOYEE WHERE emp_photo = '$name' AND empid <> $emp_id";
+    $result=executeQuery($link,$query);
+    $nrows=countRows($result);
+    if($nrows==1) return false;
+    else return true;
+}
+
+function getPhotoNm($link, $emp_id){
+    $query="SELECT emp_photo FROM EMPLOYEE WHERE emp_id = $emp_id";
+    $result=executeQuery($link,$query);
+    if($result==true&&countRows($result)==1) return retrieveElement($result,0,0);
+    else return '';
+}
+
+function updatePhotoNm($link, $name, $emp_id){
+    $commanda="UPDATE EMPLOYEE SET emp_photo='".$name."' WHERE emp_id=".$emp_id.";";
+    $resulta=executeCommand($link,$commanda);
+    if($resulta==true)
+        return true; // success	
+    else 
+        return false;
 }
 
 function updateSupervisor($link, $emp_id, $spr_id){
@@ -721,6 +744,14 @@ function populateJobLst($link, $emp_id){
     $querya="SELECT job_id, status, job_desc, created_on FROM JOB WHERE assign_to = $emp_id;";
     $resultseta=executeQuery($link,$querya);
     if($resultseta==false){
+        echo '
+            <tr>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+            </tr>
+            ';
         echo '</table>
             </div>';
         return;
@@ -728,11 +759,11 @@ function populateJobLst($link, $emp_id){
     $nRows=countRows($resultseta);
     if($nRows>=1){
         for($index=0; $index<$nRows; $index++){
-            $job_id      = retrieveElement($resultseta,$index,0);
-            $job_status  = retrieveElement($resultseta,$index,1);
-            $job_desc    = retrieveElement($resultseta,$index,2);
-            $tjob_desc = (strlen($job_desc) > 20) ? substr($job_desc, 0, 20) . '...' : $job_desc;
-            $created_on  = retrieveElement($resultseta,$index,3);
+            $job_id     = retrieveElement($resultseta,$index,0);
+            $job_status = retrieveElement($resultseta,$index,1);
+            $job_desc   = retrieveElement($resultseta,$index,2);
+            $tjob_desc  = (strlen($job_desc) > 20) ? substr($job_desc, 0, 20) . '...' : $job_desc;
+            $created_on = retrieveElement($resultseta,$index,3);
            
             $job_status  = statusMapper($job_status);
             
@@ -745,10 +776,107 @@ function populateJobLst($link, $emp_id){
                 </tr>
             ';
         }
+    }
+    else 
+        echo '
+            <tr>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+            </tr>
+            ';
+        echo '</table>
+        </div>';
+}
 
+function populateTeamLst($link, $emp_id, $allflag=false){
+    echo '
+                <div class="CSSTableGenerator" >
+                    <table id="myTable" class="tablesorter" >
+                        <tr>
+                            <td> Emp ID </td>
+                            <td> Name   </td>
+                            <td> Primary Skill  </td>
+                            <td> Secondary Skill    </td>
+                            <td> Contact Number</td>
+                            <td> Photo</td>
+                        </tr>
+                        ';
+    if($allflag==false)
+        $querya="SELECT emp_fname, emp_sname, emp_id, emp_phno, emp_primary_skill, emp_sec_skill, emp_photo FROM EMPLOYEE WHERE supervisor_id = $emp_id;";
+    else 
+        $querya="SELECT emp_fname, emp_sname, emp_id, emp_phno, emp_primary_skill, emp_sec_skill, emp_photo FROM EMPLOYEE WHERE emp_id <> 100000 ORDER BY emp_id;";
+    $resultseta=executeQuery($link,$querya);
+    if($resultseta==false){
+        echo '
+            <tr>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+            </tr>
+            ';
         echo '</table>
             </div>';
+        return;
     }
+    $nRows=countRows($resultseta);
+    if($nRows>=1){
+        for($index=0; $index<$nRows; $index++){
+            $emp_fname          = retrieveElement($resultseta,$index,0);
+            $emp_sname          = retrieveElement($resultseta,$index,1);
+            $emp_id             = retrieveElement($resultseta,$index,2);
+            $emp_phno           = retrieveElement($resultseta,$index,3);
+            $emp_primary_skill  = retrieveElement($resultseta,$index,4);
+            $emp_sec_skill      = retrieveElement($resultseta,$index,5);
+            $emp_photo          = retrieveElement($resultseta,$index,6);
+
+            if($emp_photo=='')$emp_photo='default.png';           
+            $pskill_name = skillsMapper($emp_primary_skill);
+            $sskill_name = skillsMapper($emp_sec_skill);
+            $emp_name    = $emp_fname.', '.$emp_sname;
+
+            echo '
+                <tr>
+                    <td> '.$emp_id.' </td>
+                    <td> '.$emp_name.' </td>
+                    <td> '.$pskill_name.' </td>
+                    <td> '.$sskill_name.' </td>
+                    <td> '.$emp_phno.' </td>
+                    <td> <img src="../../photos/'.$emp_photo.'" width="40px" height="40px" /> </td>
+                </tr>
+            ';
+        }
+    }
+    else 
+        echo '
+            <tr>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+                <td> NA </td>
+            </tr>
+            ';
+        echo '</table>
+        </div>';
+}
+
+function skillsMapper($skillcd){
+    $skillnm='';
+    if($skillcd=='JV') $skillnm='Java';
+    else if($skillcd=='MF') $skillnm='Mainframe';
+    else if($skillcd=='DN') $skillnm='DotNET';
+    else if($skillcd=='PH') $skillnm='PHP';
+    else if($skillcd=='TW') $skillnm='Technical Writer';
+    else if($skillcd=='BL') $skillnm='Blogger';
+    else if($skillcd=='GD') $skillnm='Graphic Designer';
+    else if($skillcd=='AC') $skillnm='Application Developer';
+    return $skillnm;
 }
 
 function displaymenu(){
