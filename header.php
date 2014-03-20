@@ -6,6 +6,9 @@
         <a href="<?php echo 'http://localhost/epmas'.'/home'; ?>">
             <img alt="Home" height="38" width="38" src="<?php echo 'http://localhost/epmas'.'/img/home.png';?>"/>
         </a> &nbsp;
+        <a href="<?php echo 'http://localhost/epmas'.'/home/user/changephoto.php'; ?>">
+            <img alt="Change Photo" height="38" width="38" src="<?php echo 'http://localhost/epmas'.'/img/changephoto.png';?>"/>
+        </a> &nbsp;
         <a href="<?php echo 'http://localhost/epmas'.'/home/user/changepass.php'; ?>">
             <img alt="Settings" height="38" width="38" src="<?php echo 'http://localhost/epmas'.'/img/settings.png';?>"/>
         </a> &nbsp;

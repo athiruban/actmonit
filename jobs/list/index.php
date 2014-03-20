@@ -7,10 +7,6 @@ if(!isset($_SESSION['emp_design'])){
     sleep(3);
     header("Location: ".FULLPATH.""); 
 }
-if($_SESSION['emp_design']!='M'){
-    echo 'Invalid Call. You dont have access to create new job.';
-    header("Location: ".FULLPATH."/home");
-}
 $USER_TYPE =$_SESSION['emp_design'];
 $USER_ID   =$_SESSION['emp_id'];
 $USER_PASS =$_SESSION['emp_password'];
@@ -44,7 +40,16 @@ $USER_PASS =$_SESSION['emp_password'];
         ?>
             <div class="large-9 medium-9 columns">
                 <div class="panel">
-                    <p>List of jobs assigned to you.</p>
+                    <p> 
+                        <h6> 
+                            <left> 
+                                <b> 
+                                    <span style="color:#0079A1"> List of Jobs assigned to you 
+                                    </span> 
+                                </b> 
+                            </left> 
+                        </h6> 
+                    </p>
                     <?php
                     populateJobLst($token, $USER_ID);    
                     ?>

@@ -197,3 +197,11 @@ else{
     });		    
 }
 });
+
+$("#changePhoto").click(function(){
+    filename = document.forms["changePhotoForm"].elements['photo'].value;
+    if(isEmpty(filename)==true){
+        return false; 
+    }
+    else document.forms["changePhotoForm"].submit();
+});

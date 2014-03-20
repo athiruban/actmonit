@@ -1,7 +1,6 @@
 <?php
 session_start();
 require('../lib/dbutils.php');
-//if no session go to login
 if(!isset($_SESSION['emp_design'])){
     echo "Authorizatin required!";
     sleep(3);
@@ -42,17 +41,25 @@ $USER_PASS =$_SESSION['emp_password'];
                 <?php
                 if($USER_TYPE=="P"){
                 ?>
-                    <h1>About Your Company</h1>
-                    <p>Here is a quote from Apple's CEO:</p>
-                    <blockquote> For 50 years, WWF has been protecting the future of nature. The world’s leading conservation organization, WWF works in 100                       countries and is supported by 1.2 million members in the United States and close to 5 million globally.
-                    </blockquote>
                     <div class="callout panel" style="background-color:white;">
-                        <h3> Welcome <?php echo getEmpName($token,$USER_ID); ?>  </h3>  	
+                        <h3> Welcome <?php 
+                                echo getEmpName($token,$USER_ID); 
+                                $photoname=getPhotoNm($token,$USER_ID); 
+                                if($photoname==''){ ?> 
+                            <img src="../photos/default.png" alt="To Do Items" width="40px" height="40px" /> 
+                                <?php } else {
+                                echo '<img src="../photos/'.$photoname.'" width="40px" height="40px" />';
+                                } ?>
+                        </h3>
                         <img src="../img/to-do.jpg" alt="To Do Items" width="40px" height="40px" />
                         <ul>
                             <li> Be Punctual in your office timings        </li>
                             <li> Submit your Leave Request when needed     </li>
                             <li> Post updates to your assigned job on time </li>
+                        </ul>
+                        <img src="../img/link.png" alt="Important Links" width="40px" height="40px" />
+                        <ul>
+                            <li> <a href="<?php echo FULLPATH.'/jobs/list'; ?>">Jobs assigned to you.</a>               </li>
                         </ul>
                     </div>	
                 <?php    
@@ -60,12 +67,26 @@ $USER_PASS =$_SESSION['emp_password'];
                 else if($USER_TYPE=="L"){
                 ?> 		
                     <div class="callout panel" style="background-color:white;">
-                        <h3> Welcome <?php echo getEmpName($token,$USER_ID); ?>  </h3>  	
+                        <h3> Welcome <?php 
+                                echo getEmpName($token,$USER_ID); 
+                                $photoname=getPhotoNm($token,$USER_ID); 
+                                if($photoname==''){ ?> 
+                            <img src="../photos/default.png" alt="To Do Items" width="40px" height="40px" /> 
+                                <?php } else {
+                                echo '<img src="../photos/'.$photoname.'" width="40px" height="40px" />';
+                                } ?>
+                        </h3>
                         <img src="../img/to-do.jpg" alt="To Do Items" width="40px" height="40px" />
                         <ul>
                             <li> Track your team member's performance and report regurlarly to your Manager </li>
                             <li> Submit your Leave Request when needed                                      </li>
                             <li> Post updates to your assigned job on time                                  </li>
+                        </ul>
+                        <img src="../img/link.png" alt="Important Links" width="40px" height="40px" />
+                        <ul>
+                            <li> <a href="<?php echo FULLPATH.'/home/user/team.php'; ?>">List of Team Members.</a></li>
+                            <li> <a href="<?php echo FULLPATH.'/leave/view/all.php'; ?>">Complete List of Leave applications.</a></li>
+                            <li> <a href="<?php echo FULLPATH.'/jobs/list'; ?>">Jobs assigned to you.</a>               </li>
                         </ul>
                     </div>	
                 <?php 	
@@ -73,7 +94,15 @@ $USER_PASS =$_SESSION['emp_password'];
                 else if($USER_TYPE=="M"){ 
                 ?>
                     <div class="callout panel" style="background-color:white;">	
-                        <h3> Welcome <?php echo getEmpName($token,$USER_ID); ?>  </h3>
+                        <h3> Welcome <?php 
+                                echo getEmpName($token,$USER_ID); 
+                                $photoname=getPhotoNm($token,$USER_ID); 
+                                if($photoname==''){ ?> 
+                            <img src="../photos/default.png" alt="To Do Items" width="40px" height="40px" /> 
+                                <?php } else {
+                                echo '<img src="../photos/'.$photoname.'" width="40px" height="40px" />';
+                                } ?>
+                        </h3>
                         <img src="../img/to-do.jpg" alt="To Do Items" width="40px" height="40px" />
                         <ul>
                             <li> Evaluate Project Schedule and Tasks and revise plan accordingly.           </li>
@@ -82,7 +111,8 @@ $USER_PASS =$_SESSION['emp_password'];
                         </ul>
                         <img src="../img/link.png" alt="Important Links" width="40px" height="40px" />
                         <ul>
-                            <li> <a href="<?php echo FULLPATH.'/leave/view/all.php'; ?>"> Complete List of Leave applications.</a></li>
+                            <li> <a href="<?php echo FULLPATH.'/home/user/team.php'; ?>">List of All Employees.</a></li>
+                            <li> <a href="<?php echo FULLPATH.'/leave/view/all.php'; ?>">Complete List of Leave applications.</a></li>
                             <li> <a href="<?php echo FULLPATH.'/register'; ?>">Register New Employee.</a>               </li>
                             <li> <a href="<?php echo FULLPATH.'/jobs/list'; ?>">Jobs assigned to you.</a>               </li>
                             <li> <a href="<?php echo FULLPATH.'/supervisor'; ?>">Supervisor Update.</a>                 </li>
