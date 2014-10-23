@@ -8,12 +8,6 @@ Small organizations can use the software to manage their routine tasks among the
 It has a leave notifiation system, in which when a person applies for leave it will be automatically notified to their immediate
 supervisor
 
-License
-=======
-
-It is free for all. Framework used in this application are not coded by me so appropriate license will apply.
-
-:)
 
 How to run
 ==========
