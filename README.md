@@ -1,6 +1,8 @@
 epmas
 =====
 
+epmas - employee performance monitoring and action system
+
 epmas is a job management and leave automation system.
 
 Small organizations can use the software to manage their routine tasks among them.
