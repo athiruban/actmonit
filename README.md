@@ -8,8 +8,12 @@ epmas is a job management and leave automation system.
 Small organizations can use the software to manage their routine tasks among them.
 
 It has a leave notifiation system, in which when a person applies for leave it will be automatically notified to their immediate
-supervisor
+supervisor.
 
+Future Enhancements
+===================
+Identifying employee slack time and utilizing them at more micro level.
+Collecting and sending metrics based on employee work tracking mechanism.
 
 How to run
 ==========
