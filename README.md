@@ -18,9 +18,12 @@ Collecting and sending metrics based on employee work tracking mechanism.
 How to run
 ==========
 
-1) Download the code to your wamp directory under www
+1) Download the code to your wamp directory under 'www' 
+
 2) Make sure that your root folder is named 'epmas' and check 'allow url include' is checked in your PHP settings.
+
 3) To auto populate DB, Go to <localhost>/epmas/configure/create-tables.php
+
 
 Note: To clean the DB use the below URL
 <localhost>/epmas/configure/remove-tables.php
